@@ -1,3 +1,3 @@
-let URL = "https://www.mandenderkoder.com/ca3_backend"
+let URL = "http://localhost:8080/jpareststarter"
 
 export {URL};
