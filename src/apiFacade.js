@@ -48,13 +48,60 @@ function apiFacade() {
 
     return role;
   };
+  // *************************FETCH**********************
+
+  const fetchUsersByPhone = (phone) => {
+    const options = makeOptions("GET")
+    return fetch(URL + "/api/users/phone/" + phone, options)
+      .then(handleHttpErrors);
+  }
+
+  const fetchUsersByHobby = (hobby) => {
+    const options = makeOptions("GET")
+    return fetch(URL + "/api/users/hobby/" + hobby, options)
+      .then(handleHttpErrors)
+  }
+
+  const fetchCountByHobby = (hobby) => {
+    const options = makeOptions("GET");
+
+    return fetch(URL + "/api/users/count/" + hobby, options).then(handleHttpErrors);
+  };
+
+  const fetchUsersByCity = (city) => {
+    const options = makeOptions("GET");
+
+    return fetch(URL + "/api/users/city/" + city, options).then(handleHttpErrors);
+  };
+
+  const fetchAllZips = () => {
+    const options = makeOptions("GET");
+
+    return fetch(URL + "/api/users/allzips", options).then(handleHttpErrors);
+  };
+
+  const createUser = (user) => {
+    const options = makeOptions("POST", true, {
+      userName: user.userName,
+      userPass: user.userPass,
+      fName: user.fName, 
+      lName: user.lName,
+      phone: user.phone,
+      street: user.street,
+      zip: user.zip,
+      city: user.city,
+      hobbies: [{name: user.hobbies}]
+    })
+    return fetch(URL + "/api/users/add", options).then(handleHttpErrors)
+
+  }
 
   const fetchData = () => {
     const options = makeOptions("GET", true); //True add's the token
 
     let role = getRole();
 
-    return fetch(URL + "/api/info/" + role, options).then(handleHttpErrors);
+    return fetch(URL + "/api/users/" + role, options).then(handleHttpErrors);
   };
 
   const fetchStarwars = () => {
@@ -79,6 +126,12 @@ function apiFacade() {
     return opts;
   };
   return {
+    createUser,
+    fetchCountByHobby,
+    fetchAllZips,
+    fetchUsersByCity,
+    fetchUsersByHobby,
+    fetchUsersByPhone,
     makeOptions,
     setToken,
     getToken,
@@ -92,4 +145,5 @@ function apiFacade() {
 }
 
 const facade = apiFacade();
+
 export default facade;

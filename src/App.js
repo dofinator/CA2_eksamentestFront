@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import facade from "./apiFacade";
 import LogIn, { LoggedIn } from "./LogIn.js";
 import Header from "./Header.js";
-import Starwars from "./Starwars.js";
 import Admin from "./Admin.js";
 import User from "./User.js";
 import {
@@ -33,9 +32,6 @@ function App() {
     <div>
       <Header />
       <Switch>
-        <Route path="/starwars">
-          <Starwars />
-        </Route>
         {!loggedIn ? (
           <div>
             <Route exact path="/">
@@ -63,7 +59,7 @@ function App() {
             <div>
               <Route path="/user">
                 {facade.getRole() === "user" ? (
-                  <User />
+                  <User  />
                 ) : (
                   <p>Du er ikke logget ind som user</p>
                 )}
@@ -80,8 +76,10 @@ function App() {
             </div>
           </div>
         )}
+
       </Switch>
     </div>
   );
 }
+
 export default App;
